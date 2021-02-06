@@ -1,8 +1,12 @@
 import React from 'react';
-
 import './style.css';
 import './main';
-import Image from './Assets/home.png';
+import { lazy, Suspense } from 'react';
+
+
+const Slogan = lazy(() => import('../code-splitting/Slogan'));
+const Image = lazy(() => import('../code-splitting/Image'));
+const Item = lazy(() => import('../code-splitting/Item'));
 
 
 const Home = () => {
@@ -11,10 +15,15 @@ const Home = () => {
          <section className="home" id="home">
            <div className="home_container bd-grid">
              <div className="home_data">
-                <h1 className="home_title">NEW <br/> <span>ARRIVALS</span></h1>
-                <a href="#featured" className="button">GO SHOPPING</a>
+             
+            <Suspense fallback = {
+               <i><p className="code">Carregando o Site...Um momento!</p></i> }>
+                 <Slogan />  
+                 <Item />
+                 <Image />
+            </Suspense>
              </div>
-               <img src={Image} alt="" className="home_img" />
+          
            </div>
          </section>
       </main>
